@@ -186,141 +186,368 @@ export default function Hero() {
         }}
       />
 
-      {/* TOP BAR (TEBITA LEFT — NAV NEXT TO BURGER ON RIGHT) */}
-      <div className="absolute top-6 left-6 md:left-10 z-40 select-none cursor-default group">
-        <div className="flex items-center gap-3">
-          {/* Droplet Logo */}
-          <svg
-            width="40"
-            height="40"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-8 h-8 md:w-10 md:h-10 drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]"
-          >
-            <path
-              d="M12 2.5C12 2.5 5 10.5 5 15C5 18.866 8.13401 22 12 22C15.866 22 19 18.866 19 15C19 10.5 12 2.5 12 2.5Z"
-              className="fill-[#E0E0E0] group-hover:fill-white transition-colors duration-300"
-            />
-            <path
-              d="M12 2.5C12 2.5 5 10.5 5 15C5 18.866 8.13401 22 12 22C15.866 22 19 18.866 19 15C19 10.5 12 2.5 12 2.5Z"
-              stroke="url(#dropletGradient)"
-              strokeWidth="0.5"
-            />
-            <defs>
-              <linearGradient id="dropletGradient" x1="12" y1="2.5" x2="12" y2="22" gradientUnits="userSpaceOnUse">
-                <stop stopColor="white" />
-                <stop offset="1" stopColor="#7bff7bff" />
-              </linearGradient>
-            </defs>
-            {/* Reflection */}
-            <path
-              d="M9.5 12C9.5 12 8.5 14 8.5 15.5C8.5 17.433 10.067 19 12 19"
-              stroke="white"
-              strokeOpacity="0.3"
-              strokeWidth="1"
-              strokeLinecap="round"
-            />
-          </svg>
-
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight flex items-center gap-2">
-            <span className="text-white">TEBITA</span>
-            <span className="font-light text-gray-400 group-hover:text-white transition-colors duration-300">TECH</span>
-          </h2>
-        </div>
-      </div>
-
-      <div className="absolute top-6 right-6 md:right-10 flex items-center gap-8 z-40">
-        {/* NAV — 3 ITEMS (Hidden on mobile) */}
-        <div className="hidden md:flex items-center gap-6">
-          {["HOME", "SERVICES", "WORK"].map((item) => (
-            <a
-              key={item}
-              href={
-                item === "HOME"
-                  ? "#hero"
-                  : item === "SERVICES"
-                    ? "#impact"
-                    : "#portfolio"
-              }
-              className="text-sm tracking-[0.25em] text-gray-400 hover:text-white transition-all"
-            >
-              {item}
-            </a>
-          ))}
-        </div>
-
-        {/* BURGER ICON */}
-        <button className="w-12 h-12 rounded-full bg-[#C0C0C0] flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-[0_0_20px_rgba(192,192,192,0.5)]">
-          <div className="flex flex-col gap-1.5">
-            <span className="w-5 h-0.5 bg-black"></span>
-            <span className="w-5 h-0.5 bg-black"></span>
-          </div>
-        </button>
-      </div>
-
       {/* MAIN */}
       <div className="relative w-full h-full flex flex-col md:flex-row items-center pt-20 md:pt-0">
 
         {/* LEFT TEXT */}
         <div className="relative z-10 w-full md:w-1/2 h-1/2 md:h-full flex flex-col justify-center px-6 md:pl-16 text-center md:text-left">
           <h1 className="text-5xl md:text-7xl font-bold leading-tight mb-6">
-            Engineering the <span className="text-gray-300">Future</span>
+            We Build <span className="text-gray-300">Automations</span>
           </h1>
 
           <p className="text-gray-400 text-lg max-w-lg mx-auto md:mx-0 leading-relaxed">
-            We design intelligent systems and scalable architectures built for speed,
-            precision, and impact.
+            Connecting your tools, automating your workflows, and building web apps that make your life easier.
           </p>
         </div>
 
-        {/* RIGHT — ORB WITH CODE INSIDE */}
+        {/* RIGHT — VIDEO CAROUSEL (Editorial Style) */}
         <div className="relative w-full md:w-1/2 h-1/2 md:h-full flex items-center justify-center">
+          {/* Background Accent */}
+          <div className="absolute top-1/4 right-0 w-96 h-96 bg-gradient-to-br from-[#00FF00]/5 to-transparent blur-3xl pointer-events-none" />
 
-          <div
-            className="rounded-full w-80 h-80 md:w-[420px] md:h-[420px] relative flex items-center justify-center"
-            style={{
-              transform: `translate(${pos.x}px, ${pos.y}px)`,
-              background:
-                "radial-gradient(circle at 30% 30%, #ffffff25, #00000060 70%)",
-              boxShadow: "0 0 120px 40px rgba(255,255,255,0.1)",
-              backdropFilter: "blur(15px)",
-            }}
-          >
-            {/* CODE INSIDE ORB */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-4/5 h-3/5 bg-black/40 backdrop-blur-md rounded-lg border border-[#00FF00]/20 p-4 flex flex-col justify-between overflow-hidden shadow-[0_0_30px_rgba(0,255,0,0.1)]">
-                {/* Header */}
-                <div className="flex justify-between items-center border-b border-[#00FF00]/20 pb-2 mb-2">
-                  <div className="flex gap-1.5">
-                    <div className="w-2 h-2 rounded-full bg-red-500/50" />
-                    <div className="w-2 h-2 rounded-full bg-yellow-500/50" />
-                    <div className="w-2 h-2 rounded-full bg-green-500/50" />
+          <div className="relative w-full px-8 md:px-12">
+            {/* Label */}
+            <div className="mb-4 flex items-center gap-3">
+              <div className="w-8 h-px bg-[#E0E0E0]/30 light-theme:bg-black/20" />
+              <span className="text-xs font-mono text-[#E0E0E0]/50 tracking-[0.3em] uppercase light-theme:text-black/50">
+                In Action
+              </span>
+            </div>
+
+            {/* Video Container with Floating Icons */}
+            <div className="relative w-full aspect-video overflow-visible">
+              {/* Floating Icons */}
+              <div className="absolute -inset-12 pointer-events-none">
+                {/* n8n icon */}
+                <div className="absolute top-0 left-0 w-12 h-12 rounded-lg bg-[#EA4B71]/10 border border-[#EA4B71]/20 flex items-center justify-center animate-float" style={{ animationDelay: '0s' }}>
+                  <span className="text-xl">⚡</span>
+                </div>
+                {/* Zapier icon */}
+                <div className="absolute top-1/4 right-0 w-10 h-10 rounded-lg bg-[#FF4A00]/10 border border-[#FF4A00]/20 flex items-center justify-center animate-float" style={{ animationDelay: '1s' }}>
+                  <span className="text-lg">🟠</span>
+                </div>
+                {/* Make icon */}
+                <div className="absolute bottom-0 left-1/4 w-11 h-11 rounded-lg bg-[#6D3AFF]/10 border border-[#6D3AFF]/20 flex items-center justify-center animate-float" style={{ animationDelay: '2s' }}>
+                  <span className="text-lg">🟣</span>
+                </div>
+                {/* API icon */}
+                <div className="absolute bottom-1/4 right-1/4 w-9 h-9 rounded-lg bg-[#00D4FF]/10 border border-[#00D4FF]/20 flex items-center justify-center animate-float" style={{ animationDelay: '1.5s' }}>
+                  <span className="text-sm">🔌</span>
+                </div>
+              </div>
+
+              {/* Video Container - Rounded */}
+              <div className="relative w-full h-full rounded-2xl overflow-hidden bg-black/20 backdrop-blur-sm light-theme:bg-white/50 shadow-2xl">
+                {/* Carousel Container */}
+                <div className="relative w-full h-full overflow-hidden">
+                  {/* Video 1 with Glitch Exit */}
+                  <div
+                    className="absolute inset-0"
+                    style={{ animation: 'video-glitch-exit-1 14s infinite' }}
+                  >
+                    <video
+                      playsInline
+                      autoPlay
+                      muted
+                      loop
+                      preload="auto"
+                      className="w-full h-full"
+                      style={{
+                        transform: 'scale(1.17)',
+                        objectFit: 'cover',
+                        objectPosition: 'center'
+                      }}
+                    >
+                      <source src="/assets/make.mp4" type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
                   </div>
-                  <div className="text-[10px] font-mono text-[#00FF00]/50">TERMINAL</div>
-                </div>
 
-                {/* Code Area */}
-                <div className="font-mono text-[#00FF00] text-xs md:text-sm opacity-90 flex-1 overflow-hidden">
-                  <span className="mr-2 opacity-50">$</span>
-                  {code}
-                  <span className="inline-block w-1.5 h-4 bg-[#00FF00] ml-1 animate-pulse align-middle" />
-                </div>
+                  {/* Video 2 with Crack Enter */}
+                  <div
+                    className="absolute inset-0"
+                    style={{ animation: 'video-crack-enter-2 14s infinite' }}
+                  >
+                    <video
+                      playsInline
+                      autoPlay
+                      muted
+                      loop
+                      preload="auto"
+                      className="w-full h-full"
+                      style={{
+                        transform: 'scale(1.4)',
+                        objectFit: 'cover',
+                        objectPosition: 'center'
+                      }}
+                    >
+                      <source src="/assets/my-n8n.mp4" type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                  </div>
 
-                {/* Footer / Status */}
-                <div className="mt-2 pt-2 border-t border-[#00FF00]/20 flex justify-between text-[9px] font-mono text-[#00FF00]/40 uppercase tracking-wider">
-                  <span>CPU: 12%</span>
-                  <span>NET: ONLINE</span>
+                  {/* Glitch Overlay Effects */}
+                  <div
+                    className="absolute inset-0 pointer-events-none mix-blend-overlay"
+                    style={{ animation: 'glitch-overlay 14s infinite' }}
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-r from-red-500/0 via-cyan-500/20 to-red-500/0" />
+                  </div>
+
+                  {/* Crack Lines Effect */}
+                  <svg
+                    className="absolute inset-0 w-full h-full pointer-events-none"
+                    style={{ animation: 'crack-lines 14s infinite' }}
+                  >
+                    <line x1="0%" y1="0%" x2="100%" y2="100%" stroke="white" strokeWidth="2" opacity="0" className="crack-line-1" />
+                    <line x1="100%" y1="0%" x2="0%" y2="100%" stroke="white" strokeWidth="2" opacity="0" className="crack-line-2" />
+                    <line x1="50%" y1="0%" x2="50%" y2="100%" stroke="white" strokeWidth="1.5" opacity="0" className="crack-line-3" />
+                  </svg>
+
+                  {/* Subtle Bottom Gradient */}
+                  <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/40 to-transparent pointer-events-none light-theme:from-white/60" />
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
 
-      {/* Bottom tag */}
-      <div className="absolute bottom-10 left-14 z-10">
-        <p className="text-gray-400 text-lg">Intelligence in Motion</p>
+          {/* Animation Keyframes */}
+          <style jsx>{`
+          /* Video 1: Glitch Exit with RGB Split & Slide */
+          @keyframes video-glitch-exit-1 {
+            0% {
+              opacity: 1;
+              transform: scale(1) translate(0, 0);
+              filter: blur(0px) hue-rotate(0deg);
+              clip-path: inset(0 0 0 0);
+              z-index: 2;
+            }
+            40% {
+              opacity: 1;
+              transform: scale(1.02) translate(0, 0);
+              filter: blur(0px) hue-rotate(0deg);
+              clip-path: inset(0 0 0 0);
+              z-index: 2;
+            }
+            45% {
+              opacity: 1;
+              transform: scale(1.05) translate(-5px, 0);
+              filter: blur(0px) hue-rotate(10deg);
+              clip-path: inset(0 0 0 0);
+              z-index: 2;
+            }
+            47% {
+              opacity: 0.9;
+              transform: scale(1.08) translate(8px, -3px);
+              filter: blur(1px) hue-rotate(-10deg) saturate(2);
+              clip-path: polygon(0 0, 100% 0, 100% 30%, 0 35%);
+              z-index: 2;
+            }
+            49% {
+              opacity: 0.7;
+              transform: scale(1.12) translate(-12px, 5px);
+              filter: blur(3px) hue-rotate(15deg) saturate(3);
+              clip-path: polygon(0 35%, 100% 30%, 100% 70%, 0 75%);
+              z-index: 2;
+            }
+            50% {
+              opacity: 0;
+              transform: scale(1.2) translate(50px, 0) rotate(2deg);
+              filter: blur(10px) hue-rotate(30deg) saturate(0);
+              clip-path: polygon(0 75%, 100% 70%, 100% 100%, 0 100%);
+              z-index: 1;
+            }
+            92% {
+              opacity: 0;
+              transform: scale(0.8) translate(-50px, 0) rotate(-2deg);
+              filter: blur(10px) hue-rotate(-30deg);
+              clip-path: inset(0 0 100% 0);
+              z-index: 1;
+            }
+            96% {
+              opacity: 0.3;
+              transform: scale(0.9) translate(-10px, 0) rotate(-1deg);
+              filter: blur(5px) hue-rotate(-10deg);
+              clip-path: inset(0 0 50% 0);
+              z-index: 1;
+            }
+            98% {
+              opacity: 0.7;
+              transform: scale(0.95) translate(-3px, 0);
+              filter: blur(2px) hue-rotate(-5deg);
+              clip-path: inset(0 0 20% 0);
+              z-index: 1;
+            }
+            100% {
+              opacity: 1;
+              transform: scale(1) translate(0, 0);
+              filter: blur(0px) hue-rotate(0deg);
+              clip-path: inset(0 0 0 0);
+              z-index: 2;
+            }
+          }
+
+          /* Video 2: Crack Enter with Shatter & Slide */
+          @keyframes video-crack-enter-2 {
+            0% {
+              opacity: 0;
+              transform: scale(0.8) translate(-50px, 0) rotate(-2deg);
+              filter: blur(10px) brightness(0.5);
+              clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+              z-index: 1;
+            }
+            40% {
+              opacity: 0;
+              transform: scale(0.85) translate(-30px, 0) rotate(-1.5deg);
+              filter: blur(8px) brightness(0.6);
+              clip-path: polygon(0 0, 10% 0, 10% 100%, 0 100%);
+              z-index: 1;
+            }
+            45% {
+              opacity: 0.2;
+              transform: scale(0.9) translate(-15px, 0) rotate(-1deg);
+              filter: blur(5px) brightness(0.7);
+              clip-path: polygon(0 0, 30% 0, 30% 100%, 0 100%);
+              z-index: 1;
+            }
+            47% {
+              opacity: 0.4;
+              transform: scale(0.92) translate(-8px, 3px) rotate(-0.5deg);
+              filter: blur(3px) brightness(0.8) saturate(1.5);
+              clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+              z-index: 1;
+            }
+            49% {
+              opacity: 0.7;
+              transform: scale(0.96) translate(-3px, -2px);
+              filter: blur(1px) brightness(0.9) saturate(2);
+              clip-path: polygon(0 0, 80% 0, 80% 100%, 0 100%);
+              z-index: 1;
+            }
+            50% {
+              opacity: 1;
+              transform: scale(1) translate(0, 0);
+              filter: blur(0px) brightness(1);
+              clip-path: inset(0 0 0 0);
+              z-index: 2;
+            }
+            92% {
+              opacity: 1;
+              transform: scale(1.03) translate(0, 0);
+              filter: blur(0px) brightness(1);
+              clip-path: inset(0 0 0 0);
+              z-index: 2;
+            }
+            96% {
+              opacity: 0.8;
+              transform: scale(1.08) translate(10px, -5px) rotate(1deg);
+              filter: blur(2px) brightness(1.1) hue-rotate(10deg);
+              clip-path: polygon(0 0, 100% 0, 100% 70%, 0 65%);
+              z-index: 2;
+            }
+            98% {
+              opacity: 0.5;
+              transform: scale(1.15) translate(25px, 0) rotate(2deg);
+              filter: blur(5px) brightness(1.2) hue-rotate(20deg);
+              clip-path: polygon(0 0, 100% 0, 100% 40%, 0 35%);
+              z-index: 2;
+            }
+            100% {
+              opacity: 0;
+              transform: scale(1.25) translate(50px, 0) rotate(3deg);
+              filter: blur(10px) brightness(1.5) hue-rotate(30deg);
+              clip-path: polygon(0 0, 100% 0, 100% 10%, 0 5%);
+              z-index: 1;
+            }
+          }
+
+          /* Glitch Overlay Flash */
+          @keyframes glitch-overlay {
+            0%, 44%, 51%, 100% {
+              opacity: 0;
+            }
+            45%, 46% {
+              opacity: 0.4;
+              transform: translateX(-5px);
+            }
+            47%, 48% {
+              opacity: 0.6;
+              transform: translateX(5px);
+            }
+            49%, 50% {
+              opacity: 0.8;
+              transform: translateX(-3px);
+            }
+          }
+
+          /* Crack Lines Animation */
+          @keyframes crack-lines {
+            0%, 46%, 52%, 100% {
+              opacity: 0;
+            }
+            47% {
+              opacity: 0;
+            }
+            48% {
+              opacity: 0.6;
+            }
+            49% {
+              opacity: 0.9;
+            }
+            50% {
+              opacity: 1;
+            }
+            51% {
+              opacity: 0.5;
+            }
+          }
+
+          .crack-line-1 {
+            animation: crack-flash-1 14s infinite;
+          }
+
+          .crack-line-2 {
+            animation: crack-flash-2 14s infinite;
+          }
+
+          .crack-line-3 {
+            animation: crack-flash-3 14s infinite;
+          }
+
+          @keyframes crack-flash-1 {
+            0%, 47.5%, 51%, 100% { opacity: 0; }
+            48%, 50% { opacity: 0.8; }
+          }
+
+          @keyframes crack-flash-2 {
+            0%, 47.8%, 51%, 100% { opacity: 0; }
+            48.2%, 50% { opacity: 0.7; }
+          }
+
+          @keyframes crack-flash-3 {
+            0%, 48%, 51%, 100% { opacity: 0; }
+            48.5%, 50% { opacity: 0.6; }
+          }
+
+          @keyframes float {
+            0%, 100% {
+              transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+              transform: translateY(-20px) rotate(5deg);
+            }
+          }
+
+          .animate-float {
+            animation: float 4s ease-in-out infinite;
+          }
+        `}</style>
+        </div>
+
+        {/* Bottom tag */}
+        <div className="absolute bottom-10 left-14 z-10">
+          <p className="text-gray-400 text-lg">Intelligence in Motion</p>
+        </div>
       </div>
     </section>
   );

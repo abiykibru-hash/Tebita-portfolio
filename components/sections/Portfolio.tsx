@@ -47,11 +47,11 @@ export default function Portfolio() {
   return (
     <section id="portfolio" className="relative py-32 bg-[#050505] overflow-hidden">
       <div className="px-8 md:px-16 mb-16">
-        <h2 className="text-6xl md:text-8xl font-bold text-[#E0E0E0] tracking-tight">
-          CURATED WORK<span className="liquid-text">.</span>
+        <h2 className="text-5xl md:text-6xl font-bold text-[#E0E0E0] tracking-tight">
+          PROJECTS<span className="liquid-text">.</span>
         </h2>
         <p className="mt-6 text-xl text-[#C0C0C0]/70 max-w-2xl">
-          A gallery of precision. Each project represents a unique challenge solved through elegant engineering.
+          Recent work we've done for clients. Real projects, real results.
         </p>
       </div>
 
@@ -91,8 +91,8 @@ export default function Portfolio() {
 
                   <div
                     className={`space-y-2 transition-all duration-500 ${hoveredIndex === index
-                        ? 'opacity-100 translate-y-0'
-                        : 'opacity-0 translate-y-4'
+                      ? 'opacity-100 translate-y-0'
+                      : 'opacity-0 translate-y-4'
                       }`}
                   >
                     <div className="flex items-center gap-2 text-sm font-mono">

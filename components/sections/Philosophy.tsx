@@ -96,8 +96,8 @@ export default function Philosophy() {
 
           <div className="space-y-12">
             <div>
-              <h2 className="text-6xl md:text-8xl font-bold text-[#E0E0E0] tracking-tight mb-8">
-                OUR ETHOS<span className="liquid-text">.</span>
+              <h2 className="text-5xl md:text-6xl font-bold text-[#E0E0E0] tracking-tight mb-8">
+                ABOUT US<span className="liquid-text">.</span>
               </h2>
               <div className="w-24 h-1 bg-gradient-to-r from-[#C0C0C0] to-transparent"></div>
             </div>

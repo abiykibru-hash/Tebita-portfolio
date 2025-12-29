@@ -30,7 +30,7 @@ const DecryptingText = ({ text, reveal }: { text: string; reveal: boolean }) => 
                 }
 
                 iteration += 1 / 2; // Speed of decryption
-            }, 30);
+            }, 15);
         } else {
             setDisplayText('');
         }
@@ -71,86 +71,82 @@ export default function Testimonials() {
 
         const interval = setInterval(() => {
             setActiveIndex((prev) => (prev + 1) % testimonials.length);
-        }, 6000); // Change every 6 seconds
+        }, 8000); // Slower rotation for reading
 
         return () => clearInterval(interval);
     }, [isAutoPlaying, testimonials.length]);
 
     return (
-        <section className="relative py-32 bg-[#050505] overflow-hidden flex items-center justify-center min-h-[80vh]">
-            {/* Background Ambience */}
-            <div className="absolute inset-0 opacity-20">
-                <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-900/30 rounded-full blur-[100px] animate-pulse" />
-                <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-900/30 rounded-full blur-[100px] animate-pulse delay-1000" />
-            </div>
+        <section className="relative py-40 bg-[#050505] overflow-hidden min-h-screen flex items-center">
+            <div className="max-w-[90%] mx-auto w-full">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
 
-            <div className="relative z-10 max-w-6xl mx-auto px-8 w-full">
-                <div className="flex flex-col items-center text-center">
+                    {/* Left Column: Title & Navigation */}
+                    <div className="lg:col-span-3 flex flex-col justify-between h-full min-h-[50vh]">
+                        <div>
+                            <h2 className="text-sm font-mono text-[#E0E0E0]/50 tracking-[0.5em] uppercase mb-8 light-theme:text-black/50">
+                                Voices
+                            </h2>
+                            <div className="w-12 h-0.5 bg-[#E0E0E0]/20 light-theme:bg-black/20" />
+                        </div>
 
-                    {/* Header */}
-                    <div className="mb-16">
-                        <h2 className="text-sm md:text-base font-mono text-[#00FF00] tracking-[0.5em] uppercase mb-4">
-                            Client Testimonies
-                        </h2>
+                        <div className="flex flex-col gap-4 mt-auto">
+                            {testimonials.map((_, idx) => (
+                                <button
+                                    key={idx}
+                                    onClick={() => {
+                                        setActiveIndex(idx);
+                                        setIsAutoPlaying(false);
+                                    }}
+                                    className={`text-left text-sm font-mono transition-all duration-300 ${activeIndex === idx
+                                        ? 'text-[#E0E0E0] pl-4 border-l-2 border-[#E0E0E0] light-theme:text-black light-theme:border-black'
+                                        : 'text-[#E0E0E0]/30 hover:text-[#E0E0E0]/70 pl-0 border-l-2 border-transparent light-theme:text-black/30 light-theme:hover:text-black/70'
+                                        }`}
+                                >
+                                    {String(idx + 1).padStart(2, '0')}
+                                </button>
+                            ))}
+                        </div>
                     </div>
 
-                    {/* Main Card */}
-                    <div className="relative w-full max-w-4xl">
-                        {/* Glass Monolith */}
-                        <div className="absolute inset-0 bg-gradient-to-b from-[#ffffff05] to-[#ffffff01] backdrop-blur-sm border border-[#ffffff10] rounded-2xl transform rotate-1 scale-105 opacity-50" />
+                    {/* Right Column: Massive Quote */}
+                    <div className="lg:col-span-9 relative">
+                        {/* Huge Background Quote Mark */}
+                        <div className="absolute -top-20 -left-20 text-[12rem] md:text-[20rem] font-serif text-[#E0E0E0]/5 leading-none select-none pointer-events-none light-theme:text-black/5">
+                            "
+                        </div>
 
-                        <div className="relative bg-[#0a0a0a]/80 border border-[#333] rounded-2xl p-12 md:p-20 shadow-[0_0_50px_rgba(0,0,0,0.5)] overflow-hidden group hover:border-[#555] transition-colors duration-500">
+                        <div className="relative z-10">
+                            <h3 className="text-3xl md:text-5xl lg:text-6xl font-light text-[#E0E0E0] leading-[1.1] mb-16 tracking-tight light-theme:text-black">
+                                <span className="text-[#E0E0E0]/30 light-theme:text-black/30 mr-2">"</span>
+                                <DecryptingText
+                                    text={testimonials[activeIndex].quote}
+                                    reveal={true}
+                                    key={`quote-${activeIndex}`}
+                                />
+                                <span className="text-[#E0E0E0]/30 light-theme:text-black/30 ml-2">"</span>
+                            </h3>
 
-                            {/* Decorative Corner Accents */}
-                            <div className="absolute top-0 left-0 w-20 h-20 border-t-2 border-l-2 border-[#00FF00]/30 rounded-tl-2xl" />
-                            <div className="absolute bottom-0 right-0 w-20 h-20 border-b-2 border-r-2 border-[#00FF00]/30 rounded-br-2xl" />
-
-                            {/* Quote Icon */}
-                            <div className="absolute top-8 left-8 text-6xl text-[#ffffff10] font-serif">"</div>
-
-                            {/* Content Container */}
-                            <div className="relative z-10 min-h-[200px] flex flex-col justify-center">
-                                <h3 className="text-2xl md:text-4xl font-light text-[#E0E0E0] leading-relaxed mb-8">
-                                    <DecryptingText
-                                        text={testimonials[activeIndex].quote}
-                                        reveal={true}
-                                        key={`quote-${activeIndex}`} // Force re-render for animation
-                                    />
-                                </h3>
-
-                                <div className="flex flex-col items-center gap-2 mt-4">
-                                    <div className="text-[#00FF00] font-mono text-lg tracking-wider">
+                            <div className="flex flex-col md:flex-row md:items-end gap-8 border-t border-[#E0E0E0]/10 pt-12 light-theme:border-black/10">
+                                <div>
+                                    <div className="text-xl md:text-2xl text-[#E0E0E0] font-medium mb-2 light-theme:text-black">
                                         <DecryptingText
                                             text={testimonials[activeIndex].author}
                                             reveal={true}
                                             key={`author-${activeIndex}`}
                                         />
                                     </div>
-                                    <div className="text-[#888] text-sm font-light uppercase tracking-widest">
-                                        {testimonials[activeIndex].role} • {testimonials[activeIndex].company}
+                                    <div className="text-[#E0E0E0]/50 font-mono text-sm uppercase tracking-widest light-theme:text-black/50">
+                                        {testimonials[activeIndex].role}
                                     </div>
                                 </div>
-                            </div>
 
+                                <div className="md:ml-auto text-[#E0E0E0]/60 font-serif italic text-lg light-theme:text-black/60">
+                                    {testimonials[activeIndex].company}
+                                </div>
+                            </div>
                         </div>
                     </div>
-
-                    {/* Navigation Dots */}
-                    <div className="flex gap-4 mt-12">
-                        {testimonials.map((_, idx) => (
-                            <button
-                                key={idx}
-                                onClick={() => {
-                                    setActiveIndex(idx);
-                                    setIsAutoPlaying(false); // Stop auto-play on interaction
-                                }}
-                                className={`w-12 h-1 transition-all duration-300 ${activeIndex === idx ? 'bg-[#00FF00] w-20' : 'bg-[#333] hover:bg-[#555]'
-                                    }`}
-                                aria-label={`View testimonial ${idx + 1}`}
-                            />
-                        ))}
-                    </div>
-
                 </div>
             </div>
         </section>

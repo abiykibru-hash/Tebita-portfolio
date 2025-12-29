@@ -1,26 +1,50 @@
 'use client';
 
 import { useState } from 'react';
-import { X } from 'lucide-react';
+import { X, Sun, Moon } from 'lucide-react';
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
+  const [theme, setTheme] = useState<'dark' | 'light'>('dark');
+  const [showIndustries, setShowIndustries] = useState(false);
 
   const toggleMenu = () => setIsOpen(!isOpen);
+  const toggleTheme = () => {
+    const newTheme = theme === 'dark' ? 'light' : 'dark';
+    setTheme(newTheme);
+    document.documentElement.classList.toggle('light-theme');
+  };
 
   const menuItems = [
-    { label: 'HOME', href: '#hero' },
-    { label: 'SERVICES', href: '#impact' },
-    { label: 'WORK', href: '#portfolio' },
-    { label: 'PHILOSOPHY', href: '#philosophy' },
-    { label: 'CONTACT', href: '#footer' },
+    { label: 'HOME', href: '/#hero' },
+    { label: 'SERVICES', href: '/#impact' },
+    { label: 'INDUSTRIES', hasSubmenu: true },
+    { label: 'TECHNOLOGY', href: '/#techstack' },
+    { label: 'PROJECTS', href: '/#portfolio' },
+    { label: 'ABOUT', href: '/#philosophy' },
+    { label: 'CONTACT', href: '/#footer' },
+  ];
+
+  const industries = [
+    { label: 'Retail & eCommerce', href: '/industries/retail-ecommerce' },
+    { label: 'Fintech', href: '/industries/fintech' },
+    { label: 'Transportation & Logistics', href: '/industries/transportation-logistics' },
+    { label: 'Enterprises', href: '/industries/enterprises' },
+    { label: 'EdTech', href: '/industries/edtech' },
+    { label: 'Healthcare', href: '/industries/healthcare' },
+    { label: 'Automotive', href: '/industries/automotive' },
+    { label: 'Startups', href: '/industries/startups' },
+    { label: 'Travel & Hospitality', href: '/industries/travel-hospitality' },
+    { label: 'Real Estate', href: '/industries/real-estate' },
+    { label: 'On Demand', href: '/industries/on-demand' },
+    { label: 'Government & Public Sector', href: '/industries/government-public-sector' },
   ];
 
   return (
     <>
       <button
         onClick={toggleMenu}
-        className="fixed top-6 right-6 md:top-8 md:right-8 z-50 w-12 h-12 rounded-full bg-[#C0C0C0] flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-[0_0_20px_rgba(192,192,192,0.5)]"
+        className="md:hidden fixed top-6 right-6 z-50 w-12 h-12 rounded-full bg-[#C0C0C0] flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-[0_0_20px_rgba(192,192,192,0.5)]"
         aria-label="Toggle menu"
       >
         {isOpen ? (
@@ -37,7 +61,7 @@ export default function Navigation() {
         className={`fixed inset-0 z-40 bg-[#050505] transition-all duration-700 ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
           }`}
       >
-        <div className="absolute inset-0 flex items-center justify-center">
+        <div className="absolute inset-0 flex flex-col items-center justify-center overflow-y-auto py-20">
           <div
             className={`absolute inset-0 transition-all duration-1000 ${isOpen ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
               }`}
@@ -46,25 +70,50 @@ export default function Navigation() {
             }}
           />
 
-          <ul className="relative z-10 space-y-8">
+          <ul className="relative z-10 space-y-6 px-8 w-full max-w-md">
             {menuItems.map((item, index) => (
               <li
                 key={item.label}
                 className={`transition-all duration-500 ${isOpen
-                    ? 'translate-y-0 opacity-100'
-                    : 'translate-y-10 opacity-0'
+                  ? 'translate-y-0 opacity-100'
+                  : 'translate-y-10 opacity-0'
                   }`}
                 style={{
                   transitionDelay: isOpen ? `${index * 100}ms` : '0ms',
                 }}
               >
-                <a
-                  href={item.href}
-                  onClick={() => setIsOpen(false)}
-                  className="block text-5xl md:text-7xl font-light tracking-wider text-[#E0E0E0] hover:text-[#C0C0C0] transition-colors duration-300 ripple-effect"
-                >
-                  {item.label}
-                </a>
+                {item.hasSubmenu ? (
+                  <div>
+                    <button
+                      onClick={() => setShowIndustries(!showIndustries)}
+                      className="block text-4xl md:text-5xl font-light tracking-wider text-[#E0E0E0] hover:text-[#C0C0C0] transition-colors duration-300 w-full text-left"
+                    >
+                      {item.label} {showIndustries ? '−' : '+'}
+                    </button>
+                    {showIndustries && (
+                      <div className="mt-4 ml-6 space-y-3 max-h-64 overflow-y-auto">
+                        {industries.map((industry) => (
+                          <a
+                            key={industry.href}
+                            href={industry.href}
+                            onClick={() => setIsOpen(false)}
+                            className="block text-lg text-[#C0C0C0] hover:text-white transition-colors"
+                          >
+                            {industry.label}
+                          </a>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <a
+                    href={item.href}
+                    onClick={() => setIsOpen(false)}
+                    className="block text-4xl md:text-5xl font-light tracking-wider text-[#E0E0E0] hover:text-[#C0C0C0] transition-colors duration-300"
+                  >
+                    {item.label}
+                  </a>
+                )}
               </li>
             ))}
           </ul>

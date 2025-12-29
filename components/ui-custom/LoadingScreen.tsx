@@ -125,7 +125,7 @@ export default function LoadingScreen() {
             TEBITA
           </h1>
           <p className="text-sm md:text-base font-mono text-[#C0C0C0]/60 tracking-[0.3em] uppercase mt-3 animate-pulse">
-            Intelligence in Motion
+            Automation & Web Dev
           </p>
         </div>
 

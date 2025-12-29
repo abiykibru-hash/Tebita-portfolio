@@ -5,10 +5,11 @@ import LiveMetrics from '@/components/sections/LiveMetrics';
 import Testimonials from '@/components/sections/Testimonials';
 import Philosophy from '@/components/sections/Philosophy';
 import Footer from '@/components/sections/Footer';
-import Navigation from '@/components/sections/Navigation';
+import Header from '@/components/sections/Header';
 import CustomCursor from '@/components/ui-custom/CustomCursor';
 import LoadingScreen from '@/components/ui-custom/LoadingScreen';
 import ScrollProgress from '@/components/ui-custom/ScrollProgress';
+import TechStack from '@/components/sections/TechStack';
 
 export default function Home() {
   return (
@@ -16,10 +17,11 @@ export default function Home() {
       <LoadingScreen />
       <CustomCursor />
       <ScrollProgress />
+      <Header />
       <main className="relative overflow-x-hidden">
-        <Navigation />
         <Hero />
         <Impact />
+        <TechStack />
         <Portfolio />
         <LiveMetrics />
         <Testimonials />

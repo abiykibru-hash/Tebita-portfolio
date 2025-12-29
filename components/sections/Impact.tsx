@@ -8,24 +8,24 @@ export default function Impact() {
   const services = [
     {
       number: '01',
-      title: 'ARTIFICIAL INTELLIGENCE',
-      description: 'Neural networks that learn, adapt, and evolve. Machine learning solutions that transform data into actionable intelligence.',
-      image: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750',
-      tags: ['ML', 'Deep Learning', 'NLP', 'Computer Vision'],
+      title: 'WORKFLOW AUTOMATION',
+      description: 'We connect your tools and automate repetitive tasks using n8n, Zapier, and Make. Whether it\'s syncing data between apps or building complex multi-step workflows—we handle it.',
+      image: '/assets/image.png',
+      tags: ['n8n', 'Zapier', 'Make', 'API Integration', 'Webhooks'],
     },
     {
       number: '02',
-      title: 'FULL STACK ARCHITECTURE',
-      description: 'End-to-end solutions built on robust, scalable foundations. From database design to cloud deployment, we architect the complete digital ecosystem.',
+      title: 'WEB DEVELOPMENT',
+      description: 'Custom web apps built with React, Node.js, and modern tools. We create dashboards, admin panels, and customer portals that actually work with your workflows.',
       image: 'https://images.pexels.com/photos/1181263/pexels-photo-1181263.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750',
       tags: ['React', 'Node.js', 'PostgreSQL', 'AWS'],
     },
     {
       number: '03',
-      title: 'HYPER-AUTOMATION',
-      description: 'Workflows that execute themselves. Business processes reimagined through intelligent automation, reducing friction and maximizing efficiency.',
-      image: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750',
-      tags: ['RPA', 'API Integration', 'Workflow', 'DevOps'],
+      title: 'AI INTEGRATION',
+      description: 'We plug AI into your workflows. Think automated email responses, smart data extraction, or chatbots that actually help. Using OpenAI, Claude, and other AI tools.',
+      image: 'assets/image copy 2.png',
+      tags: ['OpenAI', 'Claude', 'AI Workflows', 'Smart Automation'],
     },
   ];
 
@@ -33,11 +33,11 @@ export default function Impact() {
     <section id="impact" className="relative min-h-screen py-32 px-8 md:px-16 bg-[#050505]">
       <div className="max-w-7xl mx-auto">
         <div className="mb-24">
-          <h2 className="text-6xl md:text-8xl font-bold text-[#E0E0E0] tracking-tight">
-            IMPACT<span className="liquid-text">.</span>
+          <h2 className="text-5xl md:text-6xl font-bold text-[#E0E0E0] tracking-tight">
+            SERVICES<span className="liquid-text">.</span>
           </h2>
           <p className="mt-6 text-xl text-[#C0C0C0]/70 max-w-2xl">
-            Three pillars of technological excellence. Each service engineered to create exponential value.
+            We automate workflows, build web apps, and integrate AI. Simple as that.
           </p>
         </div>
 
@@ -45,6 +45,7 @@ export default function Impact() {
           {services.map((service, index) => (
             <div
               key={service.number}
+              id={index === 0 ? 'service-automation' : index === 1 ? 'service-web' : 'service-ai'}
               className="relative group"
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}

@@ -1,48 +1,16 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
+import { getProjects } from '@/lib/supabase';
 
 export default function Portfolio() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [projects, setProjects] = useState<any[]>([]);
 
-  const projects = [
-    {
-      title: 'NEXUS AI',
-      client: 'Fortune 500 Retail',
-      tech: 'TensorFlow • Python • Cloud ML',
-      outcome: '43% increase in prediction accuracy',
-      image: 'https://images.pexels.com/photos/8386434/pexels-photo-8386434.jpeg?auto=compress&cs=tinysrgb&w=800&h=1200',
-    },
-    {
-      title: 'QUANTUM FLOW',
-      client: 'FinTech Startup',
-      tech: 'React • Node.js • PostgreSQL',
-      outcome: 'Processed $2M+ in first month',
-      image: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=800&h=1200',
-    },
-    {
-      title: 'SYNAPSE',
-      client: 'Healthcare Corp',
-      tech: 'NLP • HIPAA • Real-time Analytics',
-      outcome: '67% reduction in processing time',
-      image: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800&h=1200',
-    },
-    {
-      title: 'AUTOMATION SUITE',
-      client: 'Manufacturing Giant',
-      tech: 'RPA • IoT • Edge Computing',
-      outcome: '$1.2M annual cost savings',
-      image: 'https://images.pexels.com/photos/1181263/pexels-photo-1181263.jpeg?auto=compress&cs=tinysrgb&w=800&h=1200',
-    },
-    {
-      title: 'ECLIPSE PLATFORM',
-      client: 'E-commerce Leader',
-      tech: 'Microservices • Kubernetes • Redis',
-      outcome: '99.99% uptime achieved',
-      image: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=800&h=1200',
-    },
-  ];
+  useEffect(() => {
+    getProjects().then(setProjects);
+  }, []);
 
   return (
     <section id="portfolio" className="relative py-32 bg-[#050505] overflow-hidden">
@@ -101,7 +69,7 @@ export default function Portfolio() {
                     </div>
                     <div className="flex items-center gap-2 text-sm font-mono">
                       <span className="w-2 h-2 bg-[#C0C0C0]"></span>
-                      <span className="text-[#C0C0C0]/70">{project.tech}</span>
+                      <span className="text-[#C0C0C0]/70">{project.tech_stack}</span>
                     </div>
                     <div className="flex items-center gap-2 text-sm font-mono">
                       <span className="w-2 h-2 bg-[#00FF00]"></span>

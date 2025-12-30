@@ -1,33 +1,29 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { getServices } from '@/lib/supabase';
 
 export default function Impact() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [services, setServices] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const services = [
-    {
-      number: '01',
-      title: 'WORKFLOW AUTOMATION',
-      description: 'We connect your tools and automate repetitive tasks using n8n, Zapier, and Make. Whether it\'s syncing data between apps or building complex multi-step workflows—we handle it.',
-      image: '/assets/image.png',
-      tags: ['n8n', 'Zapier', 'Make', 'API Integration', 'Webhooks'],
-    },
-    {
-      number: '02',
-      title: 'WEB DEVELOPMENT',
-      description: 'Custom web apps built with React, Node.js, and modern tools. We create dashboards, admin panels, and customer portals that actually work with your workflows.',
-      image: 'https://images.pexels.com/photos/1181263/pexels-photo-1181263.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750',
-      tags: ['React', 'Node.js', 'PostgreSQL', 'AWS'],
-    },
-    {
-      number: '03',
-      title: 'AI INTEGRATION',
-      description: 'We plug AI into your workflows. Think automated email responses, smart data extraction, or chatbots that actually help. Using OpenAI, Claude, and other AI tools.',
-      image: 'assets/image copy 2.png',
-      tags: ['OpenAI', 'Claude', 'AI Workflows', 'Smart Automation'],
-    },
-  ];
+  useEffect(() => {
+    getServices().then((data) => {
+      setServices(data);
+      setLoading(false);
+    }).catch(() => setLoading(false));
+  }, []);
+
+  if (loading) {
+    return (
+      <section id="impact" className="relative min-h-screen py-32 px-8 md:px-16 bg-[#050505]">
+        <div className="max-w-7xl mx-auto flex items-center justify-center">
+          <div className="text-[#C0C0C0]">Loading services...</div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="impact" className="relative min-h-screen py-32 px-8 md:px-16 bg-[#050505]">
@@ -69,7 +65,7 @@ export default function Impact() {
                       {service.description}
                     </p>
                     <div className="flex flex-wrap gap-3">
-                      {service.tags.map((tag) => (
+                      {service.tags && service.tags.map((tag: string) => (
                         <span
                           key={tag}
                           className="px-4 py-2 text-sm font-mono border border-[#C0C0C0]/20 text-[#C0C0C0] hover:border-[#C0C0C0] transition-colors duration-300"

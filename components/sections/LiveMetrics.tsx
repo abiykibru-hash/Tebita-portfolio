@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { getLiveMetrics } from '@/lib/supabase';
 
 const MetricCard = ({ label, value, suffix = '', delay = 0 }: { label: string; value: number; suffix?: string; delay?: number }) => {
     const [count, setCount] = useState(0);
@@ -40,14 +41,25 @@ const MetricCard = ({ label, value, suffix = '', delay = 0 }: { label: string; v
 };
 
 export default function LiveMetrics() {
+    const [metrics, setMetrics] = useState<any[]>([]);
+
+    useEffect(() => {
+        getLiveMetrics().then(setMetrics);
+    }, []);
+
     return (
         <section className="py-20 bg-[#050505] border-b border-[#333]/50">
             <div className="max-w-7xl mx-auto px-8">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-                    <MetricCard label="System Uptime" value={99} suffix="%" delay={0} />
-                    <MetricCard label="Global Projects" value={142} delay={200} />
-                    <MetricCard label="Lines of Code" value={850} suffix="K+" delay={400} />
-                    <MetricCard label="Client ROI" value={300} suffix="%" delay={600} />
+                    {metrics.map((metric, index) => (
+                        <MetricCard
+                            key={metric.id}
+                            label={metric.label}
+                            value={metric.value}
+                            suffix={metric.suffix || ''}
+                            delay={index * 200}
+                        />
+                    ))}
                 </div>
             </div>
         </section>

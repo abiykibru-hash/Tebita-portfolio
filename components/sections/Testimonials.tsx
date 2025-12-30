@@ -44,27 +44,13 @@ const DecryptingText = ({ text, reveal }: { text: string; reveal: boolean }) => 
 export default function Testimonials() {
     const [activeIndex, setActiveIndex] = useState(0);
     const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+    const [testimonials, setTestimonials] = useState<any[]>([]);
 
-    const testimonials = [
-        {
-            quote: "Tebita Tech didn't just build our platform; they engineered a digital nervous system. The efficiency gains are not just measurable; they are exponential.",
-            author: "Sarah Chen",
-            role: "CTO, Nexus Dynamics",
-            company: "FinTech"
-        },
-        {
-            quote: "We were drowning in data. They turned it into our strongest asset. The AI integration feels less like software and more like precognition.",
-            author: "Marcus Thorne",
-            role: "Director of Operations",
-            company: "Global Logistics"
-        },
-        {
-            quote: "Absolute precision. The architecture they deployed scaled effortlessly during our biggest launch. It's rare to see code this clean and powerful.",
-            author: "Elena Rodriguez",
-            role: "VP of Engineering",
-            company: "HealthStream"
-        }
-    ];
+    useEffect(() => {
+        import('@/lib/supabase').then(({ getTestimonials }) => {
+            getTestimonials().then(setTestimonials);
+        });
+    }, []);
 
     useEffect(() => {
         if (!isAutoPlaying) return;
@@ -117,34 +103,38 @@ export default function Testimonials() {
                         </div>
 
                         <div className="relative z-10">
-                            <h3 className="text-3xl md:text-5xl lg:text-6xl font-light text-[#E0E0E0] leading-[1.1] mb-16 tracking-tight light-theme:text-black">
-                                <span className="text-[#E0E0E0]/30 light-theme:text-black/30 mr-2">"</span>
-                                <DecryptingText
-                                    text={testimonials[activeIndex].quote}
-                                    reveal={true}
-                                    key={`quote-${activeIndex}`}
-                                />
-                                <span className="text-[#E0E0E0]/30 light-theme:text-black/30 ml-2">"</span>
-                            </h3>
-
-                            <div className="flex flex-col md:flex-row md:items-end gap-8 border-t border-[#E0E0E0]/10 pt-12 light-theme:border-black/10">
-                                <div>
-                                    <div className="text-xl md:text-2xl text-[#E0E0E0] font-medium mb-2 light-theme:text-black">
+                            {testimonials.length > 0 && testimonials[activeIndex] && (
+                                <>
+                                    <h3 className="text-3xl md:text-5xl lg:text-6xl font-light text-[#E0E0E0] leading-[1.1] mb-16 tracking-tight light-theme:text-black">
+                                        <span className="text-[#E0E0E0]/30 light-theme:text-black/30 mr-2">"</span>
                                         <DecryptingText
-                                            text={testimonials[activeIndex].author}
+                                            text={testimonials[activeIndex].quote}
                                             reveal={true}
-                                            key={`author-${activeIndex}`}
+                                            key={`quote-${activeIndex}`}
                                         />
-                                    </div>
-                                    <div className="text-[#E0E0E0]/50 font-mono text-sm uppercase tracking-widest light-theme:text-black/50">
-                                        {testimonials[activeIndex].role}
-                                    </div>
-                                </div>
+                                        <span className="text-[#E0E0E0]/30 light-theme:text-black/30 ml-2">"</span>
+                                    </h3>
 
-                                <div className="md:ml-auto text-[#E0E0E0]/60 font-serif italic text-lg light-theme:text-black/60">
-                                    {testimonials[activeIndex].company}
-                                </div>
-                            </div>
+                                    <div className="flex flex-col md:flex-row md:items-end gap-8 border-t border-[#E0E0E0]/10 pt-12 light-theme:border-black/10">
+                                        <div>
+                                            <div className="text-xl md:text-2xl text-[#E0E0E0] font-medium mb-2 light-theme:text-black">
+                                                <DecryptingText
+                                                    text={testimonials[activeIndex].author}
+                                                    reveal={true}
+                                                    key={`author-${activeIndex}`}
+                                                />
+                                            </div>
+                                            <div className="text-[#E0E0E0]/50 font-mono text-sm uppercase tracking-widest light-theme:text-black/50">
+                                                {testimonials[activeIndex].role}
+                                            </div>
+                                        </div>
+
+                                        <div className="md:ml-auto text-[#E0E0E0]/60 font-serif italic text-lg light-theme:text-black/60">
+                                            {testimonials[activeIndex].company}
+                                        </div>
+                                    </div>
+                                </>
+                            )}
                         </div>
                     </div>
                 </div>
